@@ -3,9 +3,10 @@ import { LogoComponent } from './logo/logo.component';
 import { Observable, interval } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { AsyncPipe, DatePipe } from '@angular/common';
+import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-header',
-  imports: [LogoComponent, AsyncPipe, DatePipe],
+  imports: [LogoComponent, AsyncPipe, DatePipe, RouterLink],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
 })
