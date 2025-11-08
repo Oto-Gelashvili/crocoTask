@@ -5,18 +5,25 @@
 <p>{{error()}}</p>
 }
 @if(!isFetching() && !error()) {
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let post of posts()">
-      <td>{{ post.title}}</td>
-      <td>{{ post.body }}</td>
-    </tr>
-  </tbody>
-</table>
+  <div>
+    <table>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let post of posts()">
+          <td>{{ post.title}}</td>
+          <td>{{ post.body }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <app-pagination
+      [currentPage]="currentPage()"
+      [totalPages]="totalPages()"
+      (pageChange)="goToPage($event)"
+    ></app-pagination>
+  </div>
 }

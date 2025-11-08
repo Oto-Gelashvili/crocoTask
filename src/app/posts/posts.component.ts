@@ -3,9 +3,10 @@ import { Post } from '../interfaces/post.model';
 import { DataService } from '../services/data.services';
 import { LoaderComponent } from '../shared/loader/loader.component';
 import { NgForOf } from '@angular/common';
+import { PaginationComponent } from '../shared/pagination/pagination.component';
 @Component({
   selector: 'app-posts',
-  imports: [LoaderComponent, NgForOf],
+  imports: [LoaderComponent, NgForOf, PaginationComponent],
   templateUrl: './posts.component.html',
   styleUrl: './posts.component.css',
 })
@@ -13,16 +14,20 @@ export class PostsComponent {
   posts = signal<Post[]>([]);
   isFetching = signal(true);
   error = signal('');
+  currentPage = signal(1);
+  postsPerPage = 20;
+  totalPosts = 100;
 
   constructor(private dataService: DataService) {
-    this.loadPosts();
+    this.loadPosts(this.currentPage());
   }
 
-  loadPosts() {
+  loadPosts(page: number) {
     this.isFetching.set(true);
     this.error.set('');
+    const start = (page - 1) * this.postsPerPage;
 
-    this.dataService.getPosts().subscribe({
+    this.dataService.getPosts(start, this.postsPerPage).subscribe({
       next: (data) => {
         this.posts.set(data);
       },
@@ -33,5 +38,15 @@ export class PostsComponent {
       },
       complete: () => this.isFetching.set(false),
     });
+  }
+  goToPage(page: number) {
+    if (page !== this.currentPage()) {
+      this.currentPage.set(page);
+      this.loadPosts(page);
+    }
+  }
+
+  totalPages() {
+    return Math.ceil(this.totalPosts / this.postsPerPage);
   }
 }

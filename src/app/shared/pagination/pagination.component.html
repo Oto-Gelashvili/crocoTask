@@ -1,0 +1,9 @@
+<div class="pagination">
+      <button
+        *ngFor="let page of pagesArray()"
+        (click)="onPageClick(page)"
+        [disabled]="page === currentPage"
+      >
+        {{ page }}
+      </button>
+</div>

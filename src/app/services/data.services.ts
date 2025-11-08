@@ -16,9 +16,9 @@ export class DataService {
       'Failed to fetch users'
     );
   }
-  getPosts() {
+  getPosts(start = 0, limit = 20) {
     return this.fetchData<Post[]>(
-      `https://jsonplaceholder.typicode.com/posts`,
+      `https://jsonplaceholder.typicode.com/posts?_start=${start}&_limit=${limit}`,
       'Failed to fetch posts'
     );
   }
