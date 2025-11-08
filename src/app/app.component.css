@@ -1,0 +1,15 @@
+main {
+  width: 50%;
+  margin: 0 auto;
+  margin-top: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+}
+
+@media (max-width: 1023px) {
+  main {
+    width: 80%;
+  }
+}
