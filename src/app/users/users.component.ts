@@ -35,7 +35,7 @@ export class UsersComponent {
         );
       },
       error: (err) => {
-        console.log(err.message);
+        console.log(err.message, err);
         this.error.set(err.message);
         this.isFetching.set(false);
       },

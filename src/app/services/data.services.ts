@@ -18,7 +18,7 @@ export class DataService {
   }
   getPosts() {
     return this.fetchData<Post[]>(
-      'https://jsonplaceholder.typicode.com/posts',
+      `https://jsonplaceholder.typicode.com/posts`,
       'Failed to fetch posts'
     );
   }
