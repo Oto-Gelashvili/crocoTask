@@ -1,5 +1,6 @@
 :host {
   width: 100%;
+  display: flex;
 }
 #users {
   margin-block: 2.4rem;
@@ -8,6 +9,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  flex: 1;
 }
 .gridCont {
   display: grid;
@@ -185,6 +187,7 @@
   font-size: 1.8rem;
   text-align: center;
   color: var(---color);
+  margin-top: 4.8rem;
 }
 
 @media (max-width: 1200px) {

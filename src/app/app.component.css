@@ -3,8 +3,8 @@ main {
   margin: 0 auto;
   margin-top: 80px;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  /* align-items: center;
+  justify-content: center; */
   flex: 1;
   color: var(--primary-color);
   overflow-x: hidden;

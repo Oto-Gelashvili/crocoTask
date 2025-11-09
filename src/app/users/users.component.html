@@ -1,97 +1,70 @@
-@if(isFetching() && !error()) {
-<app-loader/>
-} @if(error()) {
-<p class="errorMsg">{{error()}}</p>
-}
-@if(!isFetching() && !error()) {
-    @if(users().length === 0) {
-<div class="no-data">
-    <p>No users found.</p>
-</div>
-}
-<!-- <table class="flipped-table">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Last name</th>
-            <th>Phone</th>
-            <th>Email</th>
-            <th>Company</th>
-            <th class="viewCol">View</th>
-        </tr>
-    </thead>
-    <tbody>
-        @for (user of users(); track user.id) {
-        <tr>
-            <td>{{ user.firstName}}</td>
-            <td>{{ user.lastName }}</td>
-            <td>{{ user.phone }}</td>
-            <td>{{ user.email }}</td>
-            <td>{{ user.company.name }}</td>
-            <td class="viewRow">
-                <button class="userPostBtn">
-                    <p>Posts</p>
-                </button>
-                <button class="userTasksBtn">
-                    <p>Tasks</p>
-                </button>
-            </td>
-        </tr>
-        }
-    </tbody>
-</table> -->
 <section id="users">
     <div class="heading">
         <h1>Users</h1>
-        <form id="searchForm" action="">
+        <form id="searchForm" (submit)="$event.preventDefault()">
             <input
                 id="searchBar"
                 type="text"
                 name="search"
                 placeholder="Search Users"
                 autoComplete="off"
+                [value]="searchTerm()"
+                (input)="onSearchInput($event)"
             >
             <i class="fa-solid fa-search" id="searchIcon"></i>
         </form>
     </div>
-    <div class="gridCont">
-        @for (user of users(); track user.id){
-        <div class="card">
-            <h1>{{user.name}}</h1>
-            <div class="presonalInfo">
-                <h2>Personal Information</h2>
-                <div class="nameCont">
-                    <h5>Name:</h5>
-                    <p>{{user.firstName}}</p>
-                </div>
-                <div class="lastNameCont">
-                    <h5>Last name:</h5>
-                    <p>{{user.lastName}}</p>
-                </div>
-                <div class="companyCont">
-                    <h5>Company:</h5>
-                    <p>{{user.company.name}}</p>
-                </div>
+    @if(isFetching() && !error()) {
+        <app-loader/>
+    } 
+    @if(error()) {
+        <p class="errorMsg">{{error()}}</p>
+    }
+    @if(!isFetching() && !error()) {
+        @if(users().length === 0) {
+            <div class="no-data">
+                <p>No users found.</p>
             </div>
-            <button class="userPostBtn">
-                <p>Posts</p>
-            </button>
-            <div class="contactInformation">
-                <h2>Contact Information</h2>
-                <div class="mailCont">
-                    <h5>Mail:</h5>
-                    <p>{{user.email}}</p>
-                </div>
-                <div class="phoneCont">
-                    <h5>Phone:</h5>
-                    <p>{{user.phone}}</p>
-                </div>
-            </div>
-            <button class="userTasksBtn">
-                <p>Tasks</p>
-            </button>
-        </div>
         }
-    </div>
+
+        <div class="gridCont">
+            @for (user of users(); track user.id){
+                <div class="card">
+                    <h1>{{user.name}}</h1>
+                    <div class="presonalInfo">
+                        <h2>Personal Information</h2>
+                        <div class="nameCont">
+                            <h5>Name:</h5>
+                            <p>{{user.firstName}}</p>
+                        </div>
+                        <div class="lastNameCont">
+                            <h5>Last name:</h5>
+                            <p>{{user.lastName}}</p>
+                        </div>
+                        <div class="companyCont">
+                            <h5>Company:</h5>
+                            <p>{{user.company.name}}</p>
+                        </div>
+                    </div>
+                    <button class="userPostBtn">
+                        <p>Posts</p>
+                    </button>
+                    <div class="contactInformation">
+                        <h2>Contact Information</h2>
+                        <div class="mailCont">
+                            <h5>Mail:</h5>
+                            <p>{{user.email}}</p>
+                        </div>
+                        <div class="phoneCont">
+                            <h5>Phone:</h5>
+                            <p>{{user.phone}}</p>
+                        </div>
+                    </div>
+                    <button class="userTasksBtn">
+                        <p>Tasks</p>
+                    </button>
+                </div>
+            }
+        </div>
+    }
 </section>
-}

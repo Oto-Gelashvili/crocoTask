@@ -2,40 +2,73 @@ import { Component, signal } from '@angular/core';
 import { DataService } from '../services/data.services';
 import { User } from '../interfaces/user.model';
 import { LoaderComponent } from '../shared/loader/loader.component';
+import { FormsModule } from '@angular/forms';
+import { debounceTime, Subject, Subscription } from 'rxjs';
+
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css'],
-  imports: [LoaderComponent],
+  imports: [LoaderComponent, FormsModule],
 })
 export class UsersComponent {
   users = signal<User[]>([]);
   isFetching = signal(true);
   error = signal('');
+  searchTerm = signal('');
+  private searchSubject = new Subject<string>();
+  private subscriptions = new Subscription();
 
   constructor(private dataService: DataService) {
-    this.loadUsers();
+    this.setupSearch();
+    //initial render that willrender all users
+    this.performSearch('');
   }
 
-  loadUsers() {
+  setupSearch() {
+    const searchSub = this.searchSubject
+      .pipe(debounceTime(300))
+      .subscribe((term) => {
+        this.performSearch(term);
+      });
+    this.subscriptions.add(searchSub);
+  }
+
+  onSearchInput(event: Event) {
+    const term = (event.target as HTMLInputElement).value;
+    this.searchTerm.set(term);
+    this.searchSubject.next(term);
+  }
+
+  performSearch(term: string) {
     this.isFetching.set(true);
     this.error.set('');
 
-    // setTimeout(() => {
-    //   this.error.set('Failed to fetch users (simulated error).');
-    //   this.isFetching.set(false);
-    // }, 1000);
-
-    this.dataService.getUsers().subscribe({
+    const dataSub = this.dataService.getUsers().subscribe({
       next: (data) => {
+        let filteredUsers = data;
+
+        if (term.trim()) {
+          const searchLower = term.toLowerCase();
+          filteredUsers = data.filter((user) => {
+            const firstName = user.name.split(' ')[0].toLowerCase();
+            const lastName = user.name.split(' ')[1]?.toLowerCase() || '';
+            const email = user.email.toLowerCase();
+
+            return (
+              firstName.includes(searchLower) ||
+              lastName.includes(searchLower) ||
+              email.includes(searchLower)
+            );
+          });
+        }
+
         this.users.set(
-          data.map((user) => {
-            return {
-              ...user,
-              firstName: user.name.split(' ')[0],
-              lastName: user.name.split(' ')[1],
-            };
-          })
+          filteredUsers.map((user) => ({
+            ...user,
+            firstName: user.name.split(' ')[0],
+            lastName: user.name.split(' ')[1] || '',
+          }))
         );
       },
       error: (err) => {
@@ -45,5 +78,10 @@ export class UsersComponent {
       },
       complete: () => this.isFetching.set(false),
     });
+    this.subscriptions.add(dataSub);
+  }
+  ngOnDestroy() {
+    this.subscriptions.unsubscribe();
+    this.searchSubject.complete();
   }
 }
