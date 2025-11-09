@@ -1,10 +1,8 @@
 @if(isFetching() && !error()) {
 <app-loader/>
-}
-@if(error()) {
+} @if(error()) {
 <p>{{error()}}</p>
-}
-@if(!isFetching() && !error()) {
+} @if(!isFetching() && !error()) {
 <table>
     <thead>
         <tr>
@@ -12,7 +10,8 @@
             <th>Last name</th>
             <th>Phone</th>
             <th>Email</th>
-            <th>Company Name</th>
+            <th>Company</th>
+            <th class="viewCol">View</th>
         </tr>
     </thead>
     <tbody>
@@ -23,6 +22,14 @@
             <td>{{ user.phone }}</td>
             <td>{{ user.email }}</td>
             <td>{{ user.company.name }}</td>
+            <td class="viewRow">
+                <button class="userPostBtn">
+                    <p>Posts</p>
+                </button>
+                <button class="userTasksBtn">
+                    <p>Tasks</p>
+                </button>
+            </td>
         </tr>
         }
     </tbody>
