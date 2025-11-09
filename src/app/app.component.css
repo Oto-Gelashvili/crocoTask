@@ -7,12 +7,16 @@ main {
   justify-content: center;
   flex: 1;
   color: var(--primary-color);
-
-  /* overflow: hidden; */
+  overflow-x: hidden;
 }
 
 @media (max-width: 1023px) {
   main {
-    width: 80%;
+    width: 70%;
+  }
+}
+@media (max-width: 768px) {
+  main {
+    width: clamp(280px, 80%, 80%);
   }
 }

@@ -3,3 +3,9 @@
   height: auto;
   cursor: pointer;
 }
+
+@media screen and (min-width: 1800px) {
+  .logo {
+    width: 250px;
+  }
+}

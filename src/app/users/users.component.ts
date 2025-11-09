@@ -21,6 +21,11 @@ export class UsersComponent {
     this.isFetching.set(true);
     this.error.set('');
 
+    // setTimeout(() => {
+    //   this.error.set('Failed to fetch users (simulated error).');
+    //   this.isFetching.set(false);
+    // }, 1000);
+
     this.dataService.getUsers().subscribe({
       next: (data) => {
         this.users.set(
