@@ -1,13 +1,12 @@
 import { Component, signal } from '@angular/core';
 import { DataService } from '../services/data.services';
 import { User } from '../interfaces/user.model';
-import { NgForOf } from '@angular/common';
 import { LoaderComponent } from '../shared/loader/loader.component';
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.css'],
-  imports: [NgForOf, LoaderComponent],
+  imports: [LoaderComponent],
 })
 export class UsersComponent {
   users = signal<User[]>([]);

@@ -1,28 +1,30 @@
 @if(isFetching() && !error()) {
-  <app-loader/>
+<app-loader/>
 }
 @if(error()) {
-  <p>{{error()}}</p>
+<p>{{error()}}</p>
 }
 @if(!isFetching() && !error()) {
 <table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Last name</th>
-      <th>Phone</th>
-      <th>Email</th>
-      <th>Company Name</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let user of users()">
-      <td>{{ user.firstName}}</td>
-      <td>{{ user.lastName }}</td>
-      <td>{{ user.phone }}</td>
-      <td>{{ user.email }}</td>
-      <td>{{ user.company.name }}</td>
-    </tr>
-  </tbody>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Last name</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Company Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (user of users(); track user.id) {
+        <tr>
+            <td>{{ user.firstName}}</td>
+            <td>{{ user.lastName }}</td>
+            <td>{{ user.phone }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.company.name }}</td>
+        </tr>
+        }
+    </tbody>
 </table>
 }

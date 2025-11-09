@@ -2,11 +2,10 @@ import { Component, signal } from '@angular/core';
 import { Post } from '../interfaces/post.model';
 import { DataService } from '../services/data.services';
 import { LoaderComponent } from '../shared/loader/loader.component';
-import { NgForOf } from '@angular/common';
 import { PaginationComponent } from '../shared/pagination/pagination.component';
 @Component({
   selector: 'app-posts',
-  imports: [LoaderComponent, NgForOf, PaginationComponent],
+  imports: [LoaderComponent, PaginationComponent],
   templateUrl: './posts.component.html',
   styleUrl: './posts.component.css',
 })

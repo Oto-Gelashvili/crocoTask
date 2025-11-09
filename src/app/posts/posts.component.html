@@ -14,10 +14,12 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let post of posts()">
+      @for (post of posts(); track post.id) {
+      <tr >
           <td>{{ post.title}}</td>
           <td>{{ post.body }}</td>
         </tr>
+      }
       </tbody>
     </table>
     <app-pagination

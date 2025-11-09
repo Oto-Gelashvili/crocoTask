@@ -1,9 +1,10 @@
 <div class="pagination">
+    @for (page of pagesArray(); track page) {
       <button
-        *ngFor="let page of pagesArray()"
         (click)="onPageClick(page)"
         [disabled]="page === currentPage"
       >
         {{ page }}
       </button>
+    }
 </div>
