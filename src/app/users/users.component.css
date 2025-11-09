@@ -1,17 +1,63 @@
 :host {
   width: 100%;
 }
+#users {
+  margin-block: 2.4rem;
+  color: var(--text-color);
+  font-size: 1.6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .gridCont {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 2.4rem;
   width: 100%;
-  margin-block: 2.4rem;
-  color: var(--text-color);
-  font-size: 1.6rem;
   justify-items: center;
 }
+.heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2.4rem;
+  width: 100%;
+  gap: 1.2rem;
+}
+.heading h1 {
+  font-size: 3.2rem;
+}
+#searchForm {
+  width: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.2rem;
+  transition: all 1s;
+  background: var(--secondary-color);
+  border-radius: 25px;
+  border: 3px solid var(--border-color);
+  padding: 0.8rem;
+}
+#searchBar {
+  outline: 0;
+  border: 0;
+  font-size: 1.6rem;
+  border-radius: 20px;
+  padding-left: 12px;
+  color: var(--text-color);
+  background: transparent;
+  width: 100%;
+}
 
+#searchIcon {
+  border-radius: 50%;
+  color: var(--border-color);
+  font-size: 1.8rem;
+  transition: all 1s;
+  padding-right: 8px;
+  cursor: pointer;
+}
 .gridCont .card {
   display: flex;
   flex-direction: column;
@@ -138,8 +184,9 @@
 .errorMsg {
   font-size: 1.8rem;
   text-align: center;
-  color: var(--third-color);
+  color: var(---color);
 }
+
 @media (max-width: 1200px) {
   .gridCont {
     gap: 1.6rem;
@@ -157,12 +204,23 @@
   .gridCont {
     grid-template-columns: 1fr;
   }
-  .gridCont .card {
+  .gridCont .card,
+  .heading {
     width: clamp(280px, 55%, 100%);
+  }
+  .heading {
+    flex-direction: column;
+  }
+  .heading h1 {
+    font-size: 2.4rem;
   }
 }
 @media (max-width: 375px) {
-  .gridCont .card {
+  .gridCont .card,
+  .heading {
+    width: 100%;
+  }
+  #searchForm {
     width: 100%;
   }
 }
