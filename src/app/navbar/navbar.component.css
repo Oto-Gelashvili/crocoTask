@@ -1,4 +1,4 @@
-nav {
+nav.desktopNav {
   overflow: hidden;
   position: fixed;
   top: 8rem;
@@ -11,7 +11,7 @@ nav {
   padding-block: 1.6rem;
   align-items: center;
 }
-nav ul {
+nav.desktopNav ul {
   display: flex;
   flex-direction: column;
   height: fit-content;
@@ -30,7 +30,7 @@ nav ul {
   width: 64px;
   cursor: pointer;
 }
-nav ul li {
+nav.desktopNav ul li {
   width: 100%;
   list-style: none;
   padding: 0.6rem 0.4rem;
@@ -38,7 +38,7 @@ nav ul li {
   transition: 0.4s;
 }
 
-nav ul li a {
+nav.desktopNav ul li a {
   font-size: 1.8rem;
   text-decoration: none;
   display: flex;
@@ -47,51 +47,56 @@ nav ul li a {
   align-items: center;
   color: var(--text-color);
 }
-nav ul li p {
+nav.desktopNav ul li p {
   opacity: 0;
   transition: 0.4s;
   transform: translateX(-35px);
 }
-span {
+nav.desktopNav span {
   font-size: 3.2rem;
   color: var(--text-color);
 }
-nav ul:hover {
+nav.desktopNav ul:hover {
   width: fit-content;
   padding-inline: 0.8rem;
 }
-nav ul:hover li {
+nav.desktopNav ul:hover li {
   padding-inline: 0.8rem;
 }
 
-nav ul:hover li p {
+nav.desktopNav ul:hover li p {
   opacity: 1;
   transform: translateX(0);
 }
-nav ul li:hover {
+nav.desktopNav ul li:hover {
   background-color: var(--border-color);
   border-radius: 8px;
 }
-nav ul li:active {
+nav.desktopNav ul li:active {
   background-color: var(--background-color);
 }
-nav ul li a.active span {
+nav.desktopNav ul li a.active span {
   color: var(--primary-color);
 }
 @media screen and (min-width: 1800px) {
-  span {
+  nav.desktopNav span {
     font-size: 4.8rem;
   }
-  nav ul {
+  nav.desktopNav ul {
     width: 80px;
   }
-  nav ul li a {
+  nav.desktopNav ul li a {
     font-size: 2.4rem;
   }
 }
 @media screen and (max-height: 450px) {
-  nav ul {
+  nav.desktopNav ul {
     height: 100%;
     padding-block: unset;
+  }
+}
+@media (max-width: 575px) {
+  nav.desktopNav {
+    display: none;
   }
 }

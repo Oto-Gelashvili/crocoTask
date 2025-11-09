@@ -3,15 +3,16 @@ import { LogoComponent } from './logo/logo.component';
 import { Observable, interval } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { AsyncPipe, DatePipe } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 @Component({
   selector: 'app-header',
-  imports: [LogoComponent, AsyncPipe, DatePipe, RouterLink],
+  imports: [LogoComponent, AsyncPipe, DatePipe, RouterLink, RouterLinkActive],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
 })
 export class HeaderComponent {
   currentDate$: Observable<Date>;
+  menuOpen = false;
 
   constructor() {
     this.currentDate$ = interval(1000).pipe(
@@ -19,4 +20,15 @@ export class HeaderComponent {
       map(() => new Date())
     );
   }
+
+  // if i want to not be able to scroll while hmaburger menu is open
+  // toggleMenu() {
+  //   this.menuOpen = !this.menuOpen;
+
+  //   if (this.menuOpen) {
+  //     document.body.style.overflow = 'hidden'; // disable scrolling
+  //   } else {
+  //     document.body.style.overflow = ''; // enable scrolling
+  //   }
+  // }
 }

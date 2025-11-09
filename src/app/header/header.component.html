@@ -1,4 +1,37 @@
+@let formattedDate = (currentDate$ | async | date: 'medium');
 <header>
     <app-logo routerLink="/"></app-logo>
-    <p>{{ currentDate$ | async | date: 'medium' }}</p>
+    <p class="desktopDate">{{ formattedDate }}</p>
+    <div class="hamburger" [class.active]="menuOpen" (click)="menuOpen = !menuOpen">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+    <nav class="mobileNav" [class.open]="menuOpen">
+    <ul>
+        <li>
+            <p class="mobileDate">{{ formattedDate }}</p>
+        </li>
+        <li>
+            <a routerLink="users" routerLinkActive="active" (click)="menuOpen = false">
+                <span class="material-symbols-rounded">person</span>
+                <p>Users</p>
+            </a>
+        </li>
+        <li>
+            <a routerLink="posts" routerLinkActive="active" (click)="menuOpen = false">
+                <span class="material-symbols-rounded">mail</span>
+                <p>Posts</p>
+            </a>
+        </li>
+        <li>
+            <a routerLink="promos" routerLinkActive="active" (click)="menuOpen = false">
+                <span class="material-symbols-rounded">percent_discount</span>
+                <p>Promos</p>
+            </a>
+        </li>
+    </ul>
+</nav>
+
+    
 </header>

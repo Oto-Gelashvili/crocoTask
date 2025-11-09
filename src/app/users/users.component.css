@@ -161,5 +161,8 @@
     width: clamp(280px, 55%, 100%);
   }
 }
-@media (max-width: 575px) {
+@media (max-width: 375px) {
+  .gridCont .card {
+    width: 100%;
+  }
 }

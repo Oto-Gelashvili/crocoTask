@@ -20,3 +20,9 @@ main {
     width: clamp(280px, 80%, 80%);
   }
 }
+@media (max-width: 375px) {
+  main {
+    width: 100%;
+    padding-inline: 2.4rem;
+  }
+}
