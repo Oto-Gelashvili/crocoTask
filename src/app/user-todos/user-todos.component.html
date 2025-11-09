@@ -1,0 +1,26 @@
+<section id="userPosts">
+    <div class="heading">
+        <h1>{{username()}}'s Tasks</h1>
+    </div>
+    @if(isFetching() && !error()) {
+    <app-loader/>
+    } 
+    @if(error()) {
+    <p class="errorMsg">{{error()}}</p>
+    }
+    @if(!isFetching() && !error()) {
+        @if(todos().length === 0) {
+    <div class="no-data">
+        <p>User has no posts.</p>
+    </div>
+    }
+    <div class="gridCont">
+        @for (todo of todos(); track todo.id){
+        <div class="card">
+            <h5>{{todo.title}}</h5>
+            <p>{{todo.completed}}</p>
+        </div>
+        }
+    </div>
+    }
+</section>

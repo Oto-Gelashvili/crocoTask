@@ -46,7 +46,7 @@
                             <p>{{user.company.name}}</p>
                         </div>
                     </div>
-                    <button class="userPostBtn" (click)="navigateToUserPosts(user.id,user.username)">
+                    <button class="userPostBtn" (click)="navigateToUsersX(user.id,user.username,'/posts')">
                         <p>Posts</p>
                     </button>
                     <div class="contactInformation">
@@ -60,7 +60,7 @@
                             <p>{{user.phone}}</p>
                         </div>
                     </div>
-                    <button class="userTasksBtn">
+                    <button class="userTasksBtn" (click)="navigateToUsersX(user.id,user.username,'/todos')">
                         <p>Tasks</p>
                     </button>
                 </div>

@@ -3,6 +3,7 @@ import { User } from '../interfaces/user.model';
 import { HttpClient } from '@angular/common/http';
 import { catchError, throwError } from 'rxjs';
 import { Post } from '../interfaces/post.model';
+import { Todo } from '../interfaces/todo.model';
 
 @Injectable({
   providedIn: 'root',
@@ -39,6 +40,12 @@ export class DataService {
     return this.fetchData<Post[]>(
       `https://jsonplaceholder.typicode.com/posts?userId=${userId}`,
       'Failed to fetch user posts'
+    );
+  }
+  getTodosByUserId(userId: number) {
+    return this.fetchData<Todo[]>(
+      `https://jsonplaceholder.typicode.com/todos?userId=${userId}`,
+      'Failed to fetch user todos'
     );
   }
   private fetchData<T>(url: string, errorMsg: string) {

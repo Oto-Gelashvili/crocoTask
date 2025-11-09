@@ -28,8 +28,18 @@ export class UsersComponent {
     this.performSearch('');
   }
 
-  navigateToUserPosts(userId: number, username: string) {
-    this.router.navigate(['/posts', userId], {
+  // navigateToUserPosts(userId: number, username: string) {
+  //   this.router.navigate(['/posts', userId], {
+  //     queryParams: { username: username },
+  //   });
+  // }
+  // navigateToUserTodos(userId: number, username: string) {
+  //   this.router.navigate(['/todos', userId], {
+  //     queryParams: { username: username },
+  //   });
+  // }
+  navigateToUsersX(userId: number, username: string, path: string) {
+    this.router.navigate([path, userId], {
       queryParams: { username: username },
     });
   }
