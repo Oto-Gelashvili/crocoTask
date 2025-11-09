@@ -4,6 +4,7 @@ import { User } from '../interfaces/user.model';
 import { LoaderComponent } from '../shared/loader/loader.component';
 import { FormsModule } from '@angular/forms';
 import { debounceTime, Subject, Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-users',
@@ -16,13 +17,21 @@ export class UsersComponent {
   isFetching = signal(true);
   error = signal('');
   searchTerm = signal('');
+  //manage search term
   private searchSubject = new Subject<string>();
+  //manage subscriptions
   private subscriptions = new Subscription();
 
-  constructor(private dataService: DataService) {
+  constructor(private dataService: DataService, private router: Router) {
     this.setupSearch();
     //initial render that willrender all users
     this.performSearch('');
+  }
+
+  navigateToUserPosts(userId: number, username: string) {
+    this.router.navigate(['/posts', userId], {
+      queryParams: { username: username },
+    });
   }
 
   setupSearch() {

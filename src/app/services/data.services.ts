@@ -35,6 +35,12 @@ export class DataService {
     );
   }
 
+  getPostsByUserId(userId: number) {
+    return this.fetchData<Post[]>(
+      `https://jsonplaceholder.typicode.com/posts?userId=${userId}`,
+      'Failed to fetch user posts'
+    );
+  }
   private fetchData<T>(url: string, errorMsg: string) {
     return this.httpClient.get<T>(url).pipe(
       catchError((error) => {

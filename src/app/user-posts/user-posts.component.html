@@ -1,0 +1,26 @@
+<section id="userPosts">
+    <div class="heading">
+        <h1>{{username()}}'s Posts</h1>
+    </div>
+    @if(isFetching() && !error()) {
+    <app-loader/>
+    } 
+    @if(error()) {
+    <p class="errorMsg">{{error()}}</p>
+    }
+    @if(!isFetching() && !error()) {
+        @if(posts().length === 0) {
+    <div class="no-data">
+        <p>User has no posts.</p>
+    </div>
+    }
+    <div class="gridCont">
+        @for (post of posts(); track post.id){
+        <div class="card">
+            <h5>{{post.title}}</h5>
+            <p>{{post.body}}</p>
+        </div>
+        }
+    </div>
+    }
+</section>

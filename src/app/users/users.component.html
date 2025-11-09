@@ -46,7 +46,7 @@
                             <p>{{user.company.name}}</p>
                         </div>
                     </div>
-                    <button class="userPostBtn">
+                    <button class="userPostBtn" (click)="navigateToUserPosts(user.id,user.username)">
                         <p>Posts</p>
                     </button>
                     <div class="contactInformation">
