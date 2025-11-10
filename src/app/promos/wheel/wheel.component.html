@@ -1,0 +1,65 @@
+<div class="container">
+  <h1>Spin The Wheel</h1>
+  <div class="controls">
+    <div class="input-group">
+      <label for="targetNumber">Pick the number (1-10):</label>
+      <input 
+        id="targetNumber"
+        type="number" 
+        [(ngModel)]="targetNumber" 
+        min="1" 
+        max="10"
+        [disabled]="isSpinning"
+        placeholder="write the number">
+    </div>
+  </div>
+  
+  <div class="wheel-container">
+    <svg 
+      class="wheel" 
+      [style.transform]="'rotate(' + rotation + 'deg)'"
+      [class.spinning]="isSpinning"
+      viewBox="0 0 400 400"
+      preserveAspectRatio="xMidYMid meet">
+      
+      <circle cx="200" cy="200" r="195" fill="none" />
+      
+      @for (sector of sectors; track sector.number) {
+        <g>
+          <path 
+            [attr.d]="sector.path" 
+            [attr.fill]="sector.color"
+            stroke="#777" 
+            stroke-width="2"/>
+          
+          <text 
+            [attr.x]="sector.textX" 
+            [attr.y]="sector.textY"
+            [attr.transform]="'rotate(' + sector.textRotate + ' ' + sector.textX + ' ' + sector.textY + ')' "
+            text-anchor="middle" 
+            font-size="24" 
+            font-weight="bold"
+            fill="#fff">
+            {{ sector.number }}
+          </text>
+        </g>
+      }
+      
+      <circle cx="200" cy="200" r="30" fill="#777"/>
+      <circle cx="200" cy="200" r="25" fill="#777"/>
+    </svg>
+    
+    <button 
+      (click)="spin()" 
+      [disabled]="isSpinning"
+      class="spin-button">
+      Spin
+      <div class="pointer"></div>
+    </button>
+  </div>
+
+  <!-- ✅ Error popup -->
+  <div class="error-popup" *ngIf="errorMessage">
+    {{ errorMessage }}
+  </div>
+</div>
