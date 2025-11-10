@@ -1,4 +1,4 @@
-<section id="userPosts">
+<section id="userTasks">
     <div class="heading">
         <h1>{{username()}}'s Tasks</h1>
     </div>
@@ -14,12 +14,9 @@
         <p>User has no posts.</p>
     </div>
     }
-    <div class="gridCont">
+    <div class="flexCont">
         @for (todo of todos(); track todo.id){
-        <div class="card">
-            <h5>{{todo.title}}</h5>
-            <p>{{todo.completed}}</p>
-        </div>
+        <h5 [class.completed]="todo.completed">{{todo.title}}</h5>
         }
     </div>
     }
