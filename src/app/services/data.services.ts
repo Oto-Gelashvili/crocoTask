@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { User } from '../interfaces/user.model';
 import { HttpClient } from '@angular/common/http';
-import { catchError, throwError } from 'rxjs';
+import { catchError, map, throwError } from 'rxjs';
 import { Post } from '../interfaces/post.model';
 import { Todo } from '../interfaces/todo.model';
 
@@ -17,24 +17,40 @@ export class DataService {
       'Failed to fetch users'
     );
   }
+  searchUsers(searchTerm: string) {
+    return this.getUsers().pipe(
+      map((users) => {
+        let filteredUsers = users;
+
+        if (searchTerm.trim()) {
+          const searchLower = searchTerm.toLowerCase();
+          filteredUsers = users.filter((user) => {
+            const firstName = user.name.split(' ')[0].toLowerCase();
+            const lastName = user.name.split(' ')[1]?.toLowerCase() || '';
+            const email = user.email.toLowerCase();
+
+            return (
+              firstName.includes(searchLower) ||
+              lastName.includes(searchLower) ||
+              email.includes(searchLower)
+            );
+          });
+        }
+
+        return filteredUsers.map((user) => ({
+          ...user,
+          firstName: user.name.split(' ')[0],
+          lastName: user.name.split(' ')[1] || '',
+        }));
+      })
+    );
+  }
   getPosts(start = 0, limit = 20) {
     return this.fetchData<Post[]>(
       `https://jsonplaceholder.typicode.com/posts?_start=${start}&_limit=${limit}`,
       'Failed to fetch posts'
     );
   }
-  // doesnt filter with mail
-  // searchUsers(term: string) {
-  //   const url = term
-  //     ? `https://jsonplaceholder.typicode.com/users?name_like=${term}`
-  //     : 'https://jsonplaceholder.typicode.com/users';
-  //   return this.httpClient.get<User[]>(url).pipe(
-  //     catchError((error) => {
-  //       console.error('Failed to search users', error);
-  //       return throwError(() => new Error('Failed to search users'));
-  //     })
-  //   );
-  // }
 
   getPostsByUserId(userId: number) {
     return this.fetchData<Post[]>(
