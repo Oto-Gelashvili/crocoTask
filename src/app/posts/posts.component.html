@@ -23,9 +23,11 @@
       </thead>
       <tbody>
       @for (post of posts(); track post.id) {
-      <tr >
+      <tr (click)="openPost(post)" [class.active]="openedPost() === post">
           <td class="title">{{ post.title}}</td>
-          <td class="desc">{{ post.body }}</td>
+          <td class="desc">{{ post.body }}
+            <i class="fa-solid fa-chevron-down"></i>
+          </td>
         </tr>
       }
       </tbody>

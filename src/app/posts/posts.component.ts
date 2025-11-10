@@ -16,6 +16,11 @@ export class PostsComponent {
   currentPage = signal(1);
   postsPerPage = 20;
   totalPosts = 100;
+  openedPost = signal<Post | null>(null);
+
+  openPost(post: Post) {
+    this.openedPost.update((current) => (current === post ? null : post));
+  }
 
   constructor(private dataService: DataService) {
     this.loadPosts(this.currentPage());

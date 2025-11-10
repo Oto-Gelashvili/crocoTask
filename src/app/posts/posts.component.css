@@ -36,20 +36,49 @@ thead th {
 }
 tbody tr {
   border-top: 1px solid var(--border-color);
+  cursor: pointer;
+  transition: 0.4s;
 }
 tbody td {
   padding: 1.2rem 1.6rem;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  position: relative;
+  height: 4.5rem;
+  transition: 1s;
 }
-.title {
+tbody td i {
+  cursor: pointer;
+  position: absolute;
+  right: 1.2rem;
+  top: 50%;
+  transform: translate(0, -50%);
+  color: var(--accent-color);
+  transition: 0.4s;
+}
+tbody td.title {
   max-width: 100px;
   font-size: 1.3rem;
 }
-.desc {
+tbody td.desc {
   max-width: 200px;
   color: var(--accent-color);
+  padding-right: 3.2rem;
+}
+tbody tr:hover {
+  background-color: var(--background-color);
+}
+tbody tr:active {
+  opacity: 0.7;
+}
+tbody tr.active td {
+  overflow: unset;
+  white-space: unset;
+  text-overflow: unset;
+}
+tbody tr.active i {
+  transform: translate(0, -50%) rotate(180deg);
 }
 @media (max-width: 768px) {
   .heading h1 {
@@ -61,8 +90,8 @@ tbody td {
   #Posts .heading {
     margin-bottom: 1.2rem;
   }
-  .title,
-  .desc {
+  tbody td.title,
+  tbody td.desc {
     max-width: unset;
     font-size: 1.2rem;
   }
