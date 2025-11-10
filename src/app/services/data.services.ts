@@ -23,18 +23,18 @@ export class DataService {
       'Failed to fetch posts'
     );
   }
-
-  searchUsers(term: string) {
-    const url = term
-      ? `https://jsonplaceholder.typicode.com/users?name_like=${term}`
-      : 'https://jsonplaceholder.typicode.com/users';
-    return this.httpClient.get<User[]>(url).pipe(
-      catchError((error) => {
-        console.error('Failed to search users', error);
-        return throwError(() => new Error('Failed to search users'));
-      })
-    );
-  }
+  // doesnt filter with mail
+  // searchUsers(term: string) {
+  //   const url = term
+  //     ? `https://jsonplaceholder.typicode.com/users?name_like=${term}`
+  //     : 'https://jsonplaceholder.typicode.com/users';
+  //   return this.httpClient.get<User[]>(url).pipe(
+  //     catchError((error) => {
+  //       console.error('Failed to search users', error);
+  //       return throwError(() => new Error('Failed to search users'));
+  //     })
+  //   );
+  // }
 
   getPostsByUserId(userId: number) {
     return this.fetchData<Post[]>(

@@ -3,7 +3,6 @@ import { ActivatedRoute } from '@angular/router';
 import { DataService } from '../services/data.services';
 import { Post } from '../interfaces/post.model';
 import { LoaderComponent } from '../shared/loader/loader.component';
-
 @Component({
   selector: 'app-user-posts',
   templateUrl: './user-posts.component.html',
@@ -16,6 +15,15 @@ export class UserPostsComponent implements OnInit {
   isFetching = signal(true);
   error = signal('');
   username = signal('');
+  openedCard = signal<Post | null>(null);
+
+  openCard(post: Post) {
+    this.openedCard.set(post);
+  }
+
+  closeCard() {
+    this.openedCard.set(null);
+  }
 
   constructor(
     private route: ActivatedRoute,

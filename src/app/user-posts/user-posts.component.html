@@ -16,11 +16,22 @@
     }
     <div class="gridCont">
         @for (post of posts(); track post.id){
-        <div class="card">
-            <h5>{{post.title}}</h5>
+        <div class="card" (click)="openCard(post)"  >
+            <h5>
+                <span>{{post.title}}</span>
+            </h5>
             <p>{{post.body}}</p>
         </div>
         }
     </div>
+    @if(openedCard()){
+        <div class="modalOverlay" (click)="closeCard()">
+            <div class="modalCard" (click)="$event.stopPropagation()">
+                <button class="closeBtn" (click)="closeCard()">✕</button>
+                <h5>{{ openedCard()?.title }}</h5>
+                <p>{{ openedCard()?.body }}</p>
+            </div>
+        </div>
+        }
     }
 </section>
