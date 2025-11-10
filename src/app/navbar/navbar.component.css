@@ -95,7 +95,7 @@ nav.desktopNav ul li a.active span {
     padding-block: unset;
   }
 }
-@media (max-width: 575px) {
+@media (max-width: 768px) {
   nav.desktopNav {
     display: none;
   }

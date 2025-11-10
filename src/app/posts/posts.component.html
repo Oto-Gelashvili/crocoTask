@@ -1,23 +1,31 @@
-@if(isFetching() && !error()) {
-<app-loader/>
-}
-@if(error()) {
-<p>{{error()}}</p>
-}
-@if(!isFetching() && !error()) {
-  <div>
+<section id="Posts">
+    <div class="heading">
+        <h1>Posts</h1>
+    </div>
+    @if(isFetching() && !error()) {
+    <app-loader/>
+    } 
+    @if(error()) {
+    <p class="errorMsg">{{error()}}</p>
+    }
+    @if(!isFetching() && !error()) {
+        @if(posts().length === 0) {
+    <div class="no-data">
+        <p>Thera are no posts.</p>
+    </div>
+    }
     <table>
       <thead>
         <tr>
-          <th>Title</th>
-          <th>Description</th>
+          <th class="titleHead">Title</th>
+          <th class="descHead">Description</th>
         </tr>
       </thead>
       <tbody>
       @for (post of posts(); track post.id) {
       <tr >
-          <td>{{ post.title}}</td>
-          <td>{{ post.body }}</td>
+          <td class="title">{{ post.title}}</td>
+          <td class="desc">{{ post.body }}</td>
         </tr>
       }
       </tbody>
@@ -27,5 +35,5 @@
       [totalPages]="totalPages()"
       (pageChange)="goToPage($event)"
     ></app-pagination>
-  </div>
-}
+    }
+</section>

@@ -1,10 +1,8 @@
 main {
   width: 50%;
   margin: 0 auto;
-  margin-top: 80px;
+  margin-top: 8rem;
   display: flex;
-  /* align-items: center;
-  justify-content: center; */
   flex: 1;
   color: var(--primary-color);
   overflow-x: hidden;

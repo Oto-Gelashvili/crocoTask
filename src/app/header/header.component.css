@@ -10,7 +10,7 @@ header {
   width: 100%;
   top: 0;
   z-index: 1000;
-  height: 80px;
+  height: 8rem;
 }
 header p {
   font-size: 1.8rem;
@@ -109,7 +109,7 @@ nav.mobileNav ul li:active {
     font-size: 2.4rem;
   }
 }
-@media (max-width: 575px) {
+@media (max-width: 768px) {
   header .desktopDate {
     display: none;
   }
